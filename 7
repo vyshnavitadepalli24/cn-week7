@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+int main()
+{
+    int w, n;
+    int frames[100];
+    int i, j, count;
+
+    scanf("%d", &w);
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", &frames[i]);
+    }
+
+    printf("With sliding window protocol the frames will be sent in the following manner (assuming no corruption of frames)");
+    printf("After sending %d frames at each stage sender waits for acknowledgement sent by the receiver", w);
+
+    for (i = 0; i < n; i = i + w)
+    {
+        count = 0;
+        for (j = i; j < n && j < i + w; j++)
+        {
+            if (count > 0)
+            {
+                printf(" ");
+            }
+            printf("%d", frames[j]);
+            count++;
+        }
+        if (count < w)
+        {
+            printf(" ");
+        }
+        printf("Acknowledgement of above frames sent is received by sender");
+    }
+
+    return 0;
+}
